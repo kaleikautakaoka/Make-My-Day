@@ -19,7 +19,7 @@ A calander app that allows you to save and modify appointments appointments.
 
   
 ## Documentation
-You can find our documentation on our [website](https://kaleikautakaoka.io/)
+You can find our documentation on our [website](https://kaleikautakaoka.github.io/Make-My-Day/)
 
 ## Contributors ✨
 

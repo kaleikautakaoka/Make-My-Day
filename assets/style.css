@@ -5,7 +5,7 @@ body {
   }
 
   header {
-    background-color: rgb(170, 202, 230);
+    background-color: rgb(45, 140, 223);
     max-width: fit-content;
     display: block;
     margin: auto;
@@ -39,17 +39,17 @@ body {
   }
   
   .past {
-    background-color: #d3d3d3;
+    background-color: #f3ef25;
     color: white;
   }
   
   .future {
-    background-color: #ff6961;
+    background-color: #4666cd;
     color: white;
   }
   
   .present {
-    background-color: #77dd77;
+    background-color: green;
     color: white;
   }
   
