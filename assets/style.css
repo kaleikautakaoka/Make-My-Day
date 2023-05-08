@@ -52,6 +52,15 @@ body {
     background-color: green;
     color: white;
   }
+
+  .savedEvent {
+    background-color: rgb(250, 28, 28);
+  }
+
+  .completedEvent {
+    background-color: #f3c1de;
+    text-decoration: line-through;
+  }
   
   .saveBtn {
     border-left: 1px solid black;

@@ -2,24 +2,44 @@
 const a = dayjs();
 let currentdateDiv = $("#currentDate");
 let currenttimeDiv = $("#currentTime");
-// let dateDiv = $("#currentDate");
-// let currenttimeDiv = $("#currentTime");
-// let dateDiv = $("#currentDate");
-// let currenttimeDiv = $("#currentTime");
+let presentHour = $("#presentHourDiv");
+let futureHour = $("#futureTimeDiv");
+let pastHour = $("#pastTimeDiv");
+let currentHour = a.format("h");
+console.log(currentHour);
+let timeVar = $("#hour-9");
+// let firstHour = 9;
+// let lastHour = 5;
+let textInput = $("col-2").val();
+// let textFuture = $("#text").text($(".future").val());
+let textPast = $("#text").text($(".past").val());
+let row = $(".row");
 let dateApi = a.format("MM/DD/YYYY");
 const b = a.add(8, "hour");
-console.log(b);
 let currentTime = a.format("h:mm:a");
 
+//Document ready function to ensure page is ready before events
 $(document).ready(function () {
-
   //Current Time
   currentdateDiv.text(dateApi);
   currenttimeDiv.text(currentTime);
+  dynamicCalander();  
+  $("button").on("click", function () {
+    $(this).css("background-color", "pink");
+    $("textarea").css("background-color", "pink");
+  });
+})
+$("#form").on("submit", function (event) {
+  event.preventDefault();
+});
 
+
+
+function dynamicCalander() {
   //Dynamically created time blocks
-  $("#presentHourDiv").append(` <div id="hour-9" class="row time-block present">
-        <div class="col-2 col-md-1 hour text-center py-3">9 AM</div>
+  //Present Time
+  presentHour.append(` <div id="hour-9" class="row time-block present">
+        <div class="col-2 col-md-1 hour text-center py-3" value="9" id=${currentTime}> 9 AM</div>
         <textarea class="col-8 col-md-10 description" id="text" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save-fill" viewBox="0 0 16 16">
@@ -27,11 +47,9 @@ $(document).ready(function () {
           </svg>
         </button>
       </div>`);
-
+  
   //Future Time
-  $(
-    "#futureTimeDiv"
-  ).append(`      <div id="hour-10" class="row time-block future">
+  futureHour.append(` <div id="hour-10" class="row time-block future">
         <div class="col-2 col-md-1 hour text-center py-3">10 AM</div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
@@ -40,11 +58,9 @@ $(document).ready(function () {
           </svg>
         </button>
       </div> `);
-
+  
   //Past Time
-  $(
-    "#pastTimeDiv"
-  ).append(`        <div id="hour-11" class="row time-block past">
+  pastHour.append(` <div id="hour-11" class="row time-block past">
         <div class="col-2 col-md-1 hour text-center py-3">11 AM</div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
@@ -53,8 +69,8 @@ $(document).ready(function () {
           </svg>
         </button>
       </div>
-
-      <div id="hour-9" class="row time-block past">
+  
+      <div id="hour-12" class="row time-block past">
         <div class="col-2 col-md-1 hour text-center py-3">12 PM</div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
@@ -63,8 +79,8 @@ $(document).ready(function () {
           </svg>
         </button>
       </div>
-
-      <div id="hour-10" class="row time-block past">
+  
+      <div id="hour-1" class="row time-block past">
         <div class="col-2 col-md-1 hour text-center py-3">1 PM</div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
@@ -73,8 +89,8 @@ $(document).ready(function () {
           </svg>
         </button>
       </div>
-
-      <div id="hour-11" class="row time-block past">
+  
+      <div id="hour-2" class="row time-block past">
         <div class="col-2 col-md-1 hour text-center py-3">2 PM</div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
@@ -83,8 +99,8 @@ $(document).ready(function () {
           </svg>
         </button>
       </div>
-
-      <div id="hour-9" class="row time-block past">
+  
+      <div id="hour-3" class="row time-block past">
         <div class="col-2 col-md-1 hour text-center py-3">3 PM</div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
@@ -93,8 +109,8 @@ $(document).ready(function () {
           </svg>
         </button>
       </div>
-
-      <div id="hour-10" class="row time-block past">
+  
+      <div id="hour-4" class="row time-block past">
         <div class="col-2 col-md-1 hour text-center py-3">4 PM</div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
@@ -103,8 +119,8 @@ $(document).ready(function () {
           </svg>
         </button>
       </div>
-
-      <div id="hour-11" class="row time-block past">
+  
+      <div id="hour-5" class="row time-block past">
         <div class="col-2 col-md-1 hour text-center py-3">5 PM</div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
@@ -114,30 +130,5 @@ $(document).ready(function () {
         </button>
       </div> `);
 
-});
-
-let createdEvent = $(document).on("click", ".btn", function (e) {
-  e.preventDefault();
-
-  // const eventPast =
-  // console.log(userInput);
-  // console.log(event.target);
-  // function saveEvent(e) {
-
-  // $("button").click(function () {
-  // $(".current").css("color", "orange");
-
-  // $(".current").addClass("present");
-  // $(".future").addClass("future");
-  // $(".past").addClass("past");
-
-  // $(".current").removeClass("present");
-  // $(".future").removeClass("future");
-  // $(".past").removeClass("past");
-
-  // });
-
-  // $("textarea").keypress(function (event) {
-  //    console.log(event.key);
-  //  });
-});
+        }
+      
