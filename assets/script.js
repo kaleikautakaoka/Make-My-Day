@@ -7,15 +7,11 @@ let futureHour = $("#futureTimeDiv");
 let pastHour = $("#pastTimeDiv");
 let currentHour = a.format("h");
 console.log(currentHour);
-let timeVar = $("#hour-9");
-// let firstHour = 9;
-// let lastHour = 5;
-let textInput = $("col-2").val();
-// let textFuture = $("#text").text($(".future").val());
-let textPast = $("#text").text($(".past").val());
+let divValue = $(".col-2").val();
 let row = $(".row");
 let dateApi = a.format("MM/DD/YYYY");
 const b = a.add(8, "hour");
+console.log(b);
 let currentTime = a.format("h:mm:a");
 
 //Document ready function to ensure page is ready before events
@@ -26,20 +22,54 @@ $(document).ready(function () {
   dynamicCalander();  
   $("button").on("click", function () {
     $(this).css("background-color", "pink");
-    $("textarea").css("background-color", "pink");
+    $("textarea").trigger("keyup");
+    console.log($("textarea"));
   });
 })
-$("#form").on("submit", function (event) {
-  event.preventDefault();
-});
 
+//   .past {
+//   background - yellow
+//   color: white;
+// }
+  
+//   .future {
+//   background - blue
+//   color: white;
+// }
+  
+//   .present {
+//   background - color: green;
+//   color: white;
+// }
 
+//   .savedEvent {
+//   background - color: rgb(250, 28, 28);
+// }
+// let allTimeDivs = $("#allTimes");
+let hours = [9, 10, 11, 12, 1, 2, 3, 4, 5,];
+let divs = $("#allTimes")
+
+function callback(now) {
+  return (($(this).hour() !== 1) ? 's' : '') + ']' + now.format();
+}
+
+function createPast() {
+  $(".row").addClass("past");
+  }
+
+function createPresent() {
+  $(".row").addClass("present");
+}
+
+function createFuture() {
+  $(".row").addClass("future");
+}
 
 function dynamicCalander() {
   //Dynamically created time blocks
   //Present Time
-  presentHour.append(` <div id="hour-9" class="row time-block present">
-        <div class="col-2 col-md-1 hour text-center py-3" value="9" id=${currentTime}> 9 AM</div>
+  presentHour.append(` <div class="row time-block" id="${hours[0]}" value="9">
+        <div class="col-2 col-md-1 hour text-center py-3" value="9"> ${hours[0]} AM </div>
         <textarea class="col-8 col-md-10 description" id="text" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save-fill" viewBox="0 0 16 16">
@@ -48,9 +78,10 @@ function dynamicCalander() {
         </button>
       </div>`);
   
+  
   //Future Time
-  futureHour.append(` <div id="hour-10" class="row time-block future">
-        <div class="col-2 col-md-1 hour text-center py-3">10 AM</div>
+  futureHour.append(` <div class="row time-block future" id="${hours[1]}" value="10">
+        <div class="col-2 col-md-1 hour text-center py-3" value="10">${hours[1]} AM</div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save-fill" viewBox="0 0 16 16">
@@ -60,8 +91,8 @@ function dynamicCalander() {
       </div> `);
   
   //Past Time
-  pastHour.append(` <div id="hour-11" class="row time-block past">
-        <div class="col-2 col-md-1 hour text-center py-3">11 AM</div>
+  pastHour.append(` <div class="row time-block past" id="${hours[2]}" value="11">
+        <div class="col-2 col-md-1 hour text-center py-3" value="11">${hours[2]} AM</div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save-fill" viewBox="0 0 16 16">
@@ -70,8 +101,8 @@ function dynamicCalander() {
         </button>
       </div>
   
-      <div id="hour-12" class="row time-block past">
-        <div class="col-2 col-md-1 hour text-center py-3">12 PM</div>
+      <div class="row time-block past" id="${hours[3]}" value="12">
+        <div class="col-2 col-md-1 hour text-center py-3" value="12">${hours[3]} PM</div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save-fill" viewBox="0 0 16 16">
@@ -80,8 +111,8 @@ function dynamicCalander() {
         </button>
       </div>
   
-      <div id="hour-1" class="row time-block past">
-        <div class="col-2 col-md-1 hour text-center py-3">1 PM</div>
+      <div id="${hours[4]}" class="row time-block past" value="1">
+        <div class="col-2 col-md-1 hour text-center py-3 value="1">${hours[4]} PM</div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save-fill" viewBox="0 0 16 16">
@@ -90,8 +121,8 @@ function dynamicCalander() {
         </button>
       </div>
   
-      <div id="hour-2" class="row time-block past">
-        <div class="col-2 col-md-1 hour text-center py-3">2 PM</div>
+      <div id="${hours[5]}" class="row time-block past" value="2">
+        <div class="col-2 col-md-1 hour text-center py-3" value="2">${hours[5]} PM</div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save-fill" viewBox="0 0 16 16">
@@ -100,8 +131,8 @@ function dynamicCalander() {
         </button>
       </div>
   
-      <div id="hour-3" class="row time-block past">
-        <div class="col-2 col-md-1 hour text-center py-3">3 PM</div>
+      <div id="${hours[6]}" class="row time-block past" value="3">
+        <div class="col-2 col-md-1 hour text-center py-3" value="3">${hours[6]} PM</div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save-fill" viewBox="0 0 16 16">
@@ -110,8 +141,8 @@ function dynamicCalander() {
         </button>
       </div>
   
-      <div id="hour-4" class="row time-block past">
-        <div class="col-2 col-md-1 hour text-center py-3">4 PM</div>
+      <div id="${hours[7]}" class="row time-block past">
+        <div class="col-2 col-md-1 hour text-center py-3">${hours[7]} PM</div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save-fill" viewBox="0 0 16 16">
@@ -120,8 +151,8 @@ function dynamicCalander() {
         </button>
       </div>
   
-      <div id="hour-5" class="row time-block past">
-        <div class="col-2 col-md-1 hour text-center py-3">5 PM</div>
+      <div id="${hours[8]}" class="row time-block past">
+        <div class="col-2 col-md-1 hour text-center py-3">${hours[8]} PM</div>
         <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
         <button class="btn saveBtn col-2 col-md-1" aria-label="save" value="form">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save-fill" viewBox="0 0 16 16">
@@ -129,6 +160,17 @@ function dynamicCalander() {
           </svg>
         </button>
       </div> `);
+  
+  createPresent();
+  createFuture();
+  createPast();
 
-        }
+}
+        
+$("button").on("click", function (event) {
+  event.preventDefault();
+  // let savedInLocal = $(this).prev().val();
+  // localStorage.setItem($(this).)
+
+});
       
